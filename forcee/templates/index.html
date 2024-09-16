@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Clicker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+    <!-- Основной экран -->
+    <div class="main-screen screen">
+        <div class="profile">
+            <img src="https://via.placeholder.com/50" alt="Profile Pic" id="profile-pic">
+            <span id="username" class="text-with-background">Username</span>
+        </div>
+
+        <div class="header">
+            <div class="balance" style="display: inline-block; background-color: #d0d0d0; padding: 10px; color: #000; border-radius: 10px;">
+                Баланс: <span id="coins">0</span> монет
+            </div>
+            <div class="income" style="display: inline-block; background-color: #d0d0d0; padding: 10px; color: #000; border-radius: 10px;">
+                Доход в час: <span id="income">0</span>
+            </div>
+        </div>
+
+        <div class="coin" id="coin"></div>
+
+        <div class="energy-container">
+            <div class="energy-info">
+                <div class="label">🔋 Энергия <span id="energy-value">100</span></div>
+            </div>
+            <button id="boost" class="boost-button">🚀 Буст</button>
+        </div>
+
+        <div class="nav">
+            <button data-target="main-screen">
+                <span class="emoji">🏠</span>
+                <span class="label">Главная</span>
+            </button>
+            <button data-target="cards-screen">
+                <span class="emoji">🃏</span>
+                <span class="label">Карточки</span>
+            </button>
+            <button data-target="slot-screen">
+                <span class="emoji">🔄</span>
+                <span class="label">Слот</span>
+            </button>
+            <button data-target="tasks-screen">
+                <span class="emoji">📝</span>
+                <span class="label">Задачи</span>
+            </button>
+            <button data-target="friends-screen">
+                <span class="emoji">👫</span>
+                <span class="label">Друзья</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Экран карточек -->
+    <div class="cards-screen screen" style="display: none;">
+        <div class="header">
+            <div class="balance" style="display: inline-block; background-color: #d0d0d0; padding: 10px; color: #000; border-radius: 10px;">
+                Баланс: <span id="coins">0</span> монет
+            </div>
+            <div class="income" style="display: inline-block; background-color: #d0d0d0; padding: 10px; color: #000; border-radius: 10px;">
+                Доход в час: <span id="income">0</span>
+            </div>
+        </div>
+
+        <div class="card-container">
+    <div class="card" data-card="1">
+        <h3>Карточка 1</h3>
+        <p class="card-description">Описание карточки.</p>
+        <p class="card-price">Цена: 200 монет</p>
+        <p class="card-income">Доход в час: 500 монет</p>
+        <button class="upgrade-button" data-card="1">Прокачать</button>
+    </div>
+    <div class="card" data-card="2">
+        <h3>Карточка 2</h3>
+        <p class="card-description">Описание карточки.</p>
+        <p class="card-price">Цена: 300 монет</p>
+        <p class="card-income">Доход в час: 750 монет</p>
+        <button class="upgrade-button" data-card="2">Прокачать</button>
+    </div>
+    <!-- Добавьте больше карточек при необходимости -->
+</div>
+
+
+        <div class="nav">
+            <button data-target="main-screen">
+                <span class="emoji">🏠</span>
+                <span class="label">Главная</span>
+            </button>
+            <button data-target="cards-screen">
+                <span class="emoji">🃏</span>
+                <span class="label">Карточки</span>
+            </button>
+            <button data-target="slot-screen">
+                <span class="emoji">🔄</span>
+                <span class="label">Слот</span>
+            </button>
+            <button data-target="tasks-screen">
+                <span class="emoji">📝</span>
+                <span class="label">Задачи</span>
+            </button>
+            <button data-target="friends-screen">
+                <span class="emoji">👫</span>
+                <span class="label">Друзья</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Экран слота -->
+    <div class="slot-screen screen" style="display: none;">
+        <div class="slot-machine">
+            <div class="slot-row">
+                <div class="slot-item">7</div>
+                <div class="slot-item">7</div>
+                <div class="slot-item">7</div>
+            </div>
+        </div>
+        <button id="spinButton">Крутить за монетки</button>
+
+        <div class="nav">
+            <button data-target="main-screen">
+                <span class="emoji">🏠</span>
+                <span class="label">Главная</span>
+            </button>
+            <button data-target="cards-screen">
+                <span class="emoji">🃏</span>
+                <span class="label">Карточки</span>
+            </button>
+            <button data-target="slot-screen">
+                <span class="emoji">🔄</span>
+                <span class="label">Слот</span>
+            </button>
+            <button data-target="tasks-screen">
+                <span class="emoji">📝</span>
+                <span class="label">Задачи</span>
+            </button>
+            <button data-target="friends-screen">
+                <span class="emoji">👫</span>
+                <span class="label">Друзья</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Экран задач -->
+    <div class="tasks-screen screen" style="display: none;">
+        <!-- Контент для экрана задач -->
+
+        <div class="nav">
+            <button data-target="main-screen">
+                <span class="emoji">🏠</span>
+                <span class="label">Главная</span>
+            </button>
+            <button data-target="cards-screen">
+                <span class="emoji">🃏</span>
+                <span class="label">Карточки</span>
+            </button>
+            <button data-target="slot-screen">
+                <span class="emoji">🔄</span>
+                <span class="label">Слот</span>
+            </button>
+            <button data-target="tasks-screen">
+                <span class="emoji">📝</span>
+                <span class="label">Задачи</span>
+            </button>
+            <button data-target="friends-screen">
+                <span class="emoji">👫</span>
+                <span class="label">Друзья</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Экран друзей -->
+    <div class="friends-screen screen" style="display: none;">
+        <!-- Контент для экрана друзей -->
+
+        <div class="nav">
+            <button data-target="main-screen">
+                <span class="emoji">🏠</span>
+                <span class="label">Главная</span>
+            </button>
+            <button data-target="cards-screen">
+                <span class="emoji">🃏</span>
+                <span class="label">Карточки</span>
+            </button>
+            <button data-target="slot-screen">
+                <span class="emoji">🔄</span>
+                <span class="label">Слот</span>
+            </button>
+            <button data-target="tasks-screen">
+                <span class="emoji">📝</span>
+                <span class="label">Задачи</span>
+            </button>
+            <button data-target="friends-screen">
+                <span class="emoji">👫</span>
+                <span class="label">Друзья</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

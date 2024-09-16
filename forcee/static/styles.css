@@ -1,0 +1,391 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: url('/static/background.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Выравнивание по левому краю */
+    margin: 20px;
+    border-bottom: 2px solid #ccc; /* Граница снизу */
+    padding-bottom: 20px; /* Отступ снизу, чтобы не прилипать к границе */
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.text-with-background {
+    background-color: #d0d0d0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #000;
+    display: inline-block;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Выравнивание по левому краю */
+    margin: 20px;
+}
+
+.main-screen, .cards-screen, .slot-screen {
+    display: none;
+}
+
+.main-screen {
+    display: block;
+}
+
+.screen {
+    padding-bottom: 60px; /* Добавляем отступ снизу, чтобы не перекрывать навигацию */
+}
+
+
+.balance {
+    display: inline-block; /* Сделать так, чтобы фон растягивался на весь блок */
+    background: url('/static/text-background.png') no-repeat center center;
+    background-size: cover; /* Или contain, в зависимости от изображения */
+    padding: 10px; /* Отступы для фона */
+    color: #fff; /* Цвет текста */
+    border-radius: 5px; /* Скругление углов, если нужно */
+}
+
+.income {
+    margin: 20px;
+}
+
+.coin {
+    width: 300px;
+    height: 300px;
+    background: url('/static/coin.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    margin: 20px auto;
+    position: relative; /* Для позиционирования суммы */
+}
+
+
+.tap-value {
+    position: absolute;
+    color: #ffffff; /* Белый цвет текста */
+    font-weight: bold;
+    font-size: 24px; /* Увеличенный размер шрифта */
+    animation: fadeUp 0.5s forwards; /* Анимация появляется и исчезает быстрее */
+    pointer-events: none; /* Чтобы сумма не мешала кликам */
+    transform: translate(-50%, -50%); /* Центрирование относительно точки касания */
+    white-space: nowrap; /* Предотвращает перенос строки */
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px); /* Переход вверх на 50px */
+    }
+}
+
+/* Основной контейнер экрана слота */
+.slot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Экран будет поверх остальных элементов */
+    overflow: hidden; /* Предотвращает прокрутку */
+}
+
+/* Кнопка для спина */
+.spin-button {
+    background-color: #0088cc; /* Цвет фона кнопки */
+    color: white; /* Цвет текста на кнопке */
+    border: none; /* Убираем границу кнопки */
+    padding: 15px 30px; /* Отступы внутри кнопки */
+    border-radius: 10px; /* Закругленные углы кнопки */
+    cursor: pointer; /* Указатель курсора при наведении */
+    font-size: 18px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавный переход фона при наведении */
+    margin: 20px; /* Отступы вокруг кнопки */
+}
+
+.spin-button:hover {
+    background-color: #005f8d; /* Темный цвет фона при наведении */
+}
+
+/* Контейнер для символов слота */
+.slot-container {
+    display: flex;
+    gap: 20px; /* Отступы между символами */
+    justify-content: center; /* Центрирование символов по горизонтали */
+}
+
+/* Элемент символа слота */
+.slot-item {
+    width: 100px; /* Ширина символа */
+    height: 100px; /* Высота символа */
+    background-size: cover; /* Подгонка изображения под размеры элемента */
+    background-position: center center; /* Центрирование изображения внутри элемента */
+}
+
+/* Картинка для каждого символа */
+.slot-item-1 {
+    background-image: url('/static/slot-item-1.png'); /* Изображение для символа 1 */
+}
+
+.slot-item-2 {
+    background-image: url('/static/slot-item-2.png'); /* Изображение для символа 2 */
+}
+
+.slot-item-3 {
+    background-image: url('/static/slot-item-3.png'); /* Изображение для символа 3 */
+}
+
+/* Кнопка для возврата на основной экран */
+.slot-back-button {
+    background-color: #ffffff; /* Цвет фона кнопки */
+    color: #000; /* Цвет текста на кнопке */
+    border: none; /* Убираем границу кнопки */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    cursor: pointer; /* Указатель курсора при наведении */
+    font-size: 16px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавный переход фона при наведении */
+    position: absolute; /* Абсолютное позиционирование для размещения в верхнем левом углу */
+    top: 20px; /* Отступ сверху */
+    left: 20px; /* Отступ слева */
+}
+
+.slot-back-button:hover {
+    background-color: #d0d0d0; /* Цвет фона при наведении */
+}
+
+
+.energy {
+    display: flex; /* Используем flexbox для выравнивания элементов по горизонтали */
+    align-items: center; /* Вертикальное выравнивание по центру */
+    background-color: #d0d0d0; /* Темно-серый фон для блока */
+    padding: 10px; /* Отступы вокруг содержимого */
+    border-radius: 10px; /* Закругленные углы */
+    margin: 20px 0; /* Отступы сверху и снизу */
+    justify-content: space-between; /* Выравнивание элементов по краям */
+}
+
+.label {
+    display: inline-block; /* Позволяет фону растягиваться на размер содержимого */
+    background-color: #d0d0d0; /* Темно-серый фон */
+    padding: 5px 10px; /* Отступы вокруг текста */
+    border-radius: 5px; /* Закругленные углы */
+    color: #000; /* Черный текст */
+}
+
+.energy-container {
+    display: flex; /* Используем flexbox для управления размещением элементов */
+    align-items: center; /* Выравниваем элементы по вертикали по центру */
+    width: 100%; /* Ширина контейнера по ширине родительского элемента */
+    max-width: 300px; /* Максимальная ширина контейнера */
+    margin: 100px auto; /* Центрирование контейнера по горизонтали и добавление отступа сверху */
+    background-color: #e0e0e0; /* Фон контейнера, такой же, как у полоски энергии */
+    padding: 10px; /* Отступы внутри контейнера */
+    border-radius: 10px; /* Закругленные углы контейнера */
+    justify-content: space-between; /* Размещаем элементы по краям контейнера */
+}
+
+.energy-info {
+    margin-right: 10px; /* Отступ между информацией об энергии и полоской энергии */
+    text-align: center; /* Центрирование текста */
+}
+
+.boost-button {
+    background-color: #ffffff; /* Цвет фона кнопки, такой же как у полоски энергии */
+    color: #000; /* Цвет текста на кнопке */
+    border: none; /* Убираем границу кнопки */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    cursor: pointer; /* Указатель курсора при наведении */
+    font-size: 16px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавный переход фона при наведении */
+    margin-left: 0; /* Убираем отступ слева, чтобы кнопка была прижата к левому краю */
+}
+
+.boost-button:hover {
+    background-color: #d0d0d0; /* Цвет фона при наведении */
+}
+
+
+/* Экран с карточками */
+.cards-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Экран будет поверх остальных элементов */
+    overflow: hidden; /* Предотвращает прокрутку */
+}
+
+.card {
+    background: white; /* Фон карточек */
+    border-radius: 10px; /* Закругленные углы карточек */
+    padding: 20px; /* Отступы внутри карточек */
+    width: 160px; /* Ширина карточек */
+    text-align: center; /* Выравнивание текста по центру */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень карточек для придания объема */
+    box-sizing: border-box; /* Учет отступов в общей ширине */
+    margin: 0 auto; /* Центрирование карточек с одинаковыми отступами слева и справа */
+}
+
+
+.card-image {
+    background: url('/static/card-image-placeholder.png') no-repeat center center; /* Фоновое изображение для карточек */
+    background-size: cover; /* Подгонка изображения под размеры карточки */
+    height: 100px; /* Высота изображения */
+    border-radius: 5px; /* Закругленные углы изображения */
+    margin-bottom: 10px; /* Отступ снизу изображения */
+}
+
+.card-info {
+    margin-top: 10px; /* Отступ сверху для информации о карточке */
+}
+
+.card-price,
+.card-income {
+    font-size: 14px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    margin: 5px 0; /* Отступы сверху и снизу */
+}
+
+.upgrade-button {
+    background-color: #0088cc; /* Цвет фона кнопки */
+    color: white; /* Цвет текста на кнопке */
+    border: none; /* Убираем границу кнопки */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Закругленные углы кнопки */
+    cursor: pointer; /* Указатель курсора при наведении */
+    font-size: 16px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавный переход фона при наведении */
+}
+
+.upgrade-button:hover {
+    background-color: #005f8d; /* Темный цвет фона при наведении */
+}
+
+.card-description {
+    font-size: 16px; /* Размер шрифта описания */
+    color: #333; /* Цвет текста */
+}
+
+/* Исправляем контейнер для карточек */
+.card-container {
+    display: flex; /* Flexbox для горизонтального расположения */
+    flex-wrap: wrap; /* Позволяет карточкам переноситься на следующую строку */
+    gap: 20px; /* Отступ между карточками */
+    justify-content: center; /* Центрирование карточек по горизонтали */
+    margin: 0 auto; /* Центрирование контейнера на странице */
+    max-width: 360px; /* Ограничиваем ширину контейнера, чтобы помещались 2 карточки */
+}
+
+.tap-value {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+    opacity: 0;
+}
+
+.tap-value {
+    opacity: 1;
+}
+
+/* Стиль для навигационного меню */
+/* Стиль для навигационного меню */
+.nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #e0e0e0;
+    padding: 5px; /* Уменьшаем отступы */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    border-top: 2px solid #ccc;
+    z-index: 1000;
+    border-radius: 10px 10px 0 0;
+    height: 80px; /* Уменьшить высоту навигации */
+}
+
+/* Стиль для кнопок в меню */
+.nav button {
+    background-color: #ffffff;
+    color: #000;
+    border: none;
+    padding: 5px 5px; /* Уменьшенные отступы для кнопок */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Уменьшенный шрифт для текста и эмодзи */
+    display: flex;
+    flex: 1; /* Все кнопки занимают одинаковое пространство */
+    margin: 0 3px; /* Увеличенный отступ между кнопками */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Эмодзи и текст отдельно */
+.nav button .emoji {
+    font-size: 20px; /* Размер эмодзи */
+}
+
+.nav button .label {
+    font-size: 10px; /* Размер текста */
+    margin-top: 3px; /* Отступ между эмодзи и текстом */
+}
+
+/* Изменение размера кнопок на мобильных устройствах */
+@media screen and (max-width: 480px) {
+    .nav {
+        height: 70px; /* Еще меньшее меню для мобильных экранов */
+    }
+    
+    .nav button {
+        font-size: 14px; /* Еще меньше размер текста */
+    }
+    
+    .nav button .emoji {
+        font-size: 18px; /* Меньше эмодзи */
+    }
+    
+    .nav button .label {
+        font-size: 8px; /* Еще меньше текст */
+    }
+}
+
+/* Стиль для кнопки при наведении */
+.nav button:hover {
+    background-color: #d0d0d0;
+}
+
